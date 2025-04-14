@@ -52,6 +52,12 @@ app.use('/live', (request, response) => {
   return response.sendStatus(200);
 });
 
+app.get('/crash', (req, res) => {
+  logger.warn('Crashing app on purpose...');
+  res.status(500).send('Application is going to crash!');
+  process.exit(1); // Termina il processo con codice di errore
+});
+
 db.init().then(() => {
   logger.info('Database init\'d');
 }).catch(error => {
